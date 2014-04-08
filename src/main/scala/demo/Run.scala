@@ -15,14 +15,14 @@ object Run extends App {
   val frameworkFactory = locator.iterator().next();
   val props = new HashMap[String, String]
   props.put("org.osgi.framework.storage.clean", "onFirstInit")
-  props.put("felix.fileinstall.dir", "target/scala-2.9.2/")
+  props.put("felix.fileinstall.dir", "target/scala-2.10/")
   props.put("felix.fileinstall.filter", ".*\\.jar")
   props.put("felix.fileinstall.poll", "100")
   val framework = frameworkFactory.newFramework(props);
   framework.start();
   val context = framework.getBundleContext();
   val mvnProtocolBundle = context.installBundle(
-      "http://repo1.maven.org/maven2/org/ops4j/pax/url/pax-url-mvn/1.3.5/pax-url-mvn-1.3.5.jar")
+      "http://repo1.maven.org/maven2/org/ops4j/pax/url/pax-url-mvn/1.3.7/pax-url-mvn-1.3.7.jar")
   mvnProtocolBundle.start();
   def mvn(url : String) = context.installBundle(String.format("mvn:%s", url))
   val bundles = List(
